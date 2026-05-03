@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rahul — Software Engineer</title>
+  <meta name="description"
+    content="Software Engineer. Full-stack, DevOps & AI. Python · Node.js · Angular · Docker · Kubernetes.">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <!-- ═══════════════════════════
+       NAVBAR
+  ═══════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo" id="navLogo">RaHuL.m</a>
+      <div class="nav-links">
+        <a href="#" id="navHome">Home</a>
+        <a href="#about" data-scroll>About</a>
+        <a href="#work" data-scroll>Work</a>
+        <a href="#skills" data-scroll>Skills</a>
+        <a href="#faq" data-scroll>FAQ</a>
+      </div>
+      <div class="nav-right">
+        <span class="nav-status"><span class="s-dot"></span>Available</span>
+        <a href="#contact" class="btn-hire magnetic" data-scroll>Contact Me →</a>
+      </div>
+    </div>
+    <!-- Mobile nav -->
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="mob-menu" id="mobMenu">
+      <div class="mob-menu-inner">
+        <nav class="mob-menu-links">
+          <a href="#" class="mob-menu-link" id="mobHome"><span class="mm-num">01</span>Home</a>
+          <a href="#about" class="mob-menu-link" data-scroll><span class="mm-num">02</span>About</a>
+          <a href="#work" class="mob-menu-link" data-scroll><span class="mm-num">03</span>Work</a>
+          <a href="#skills" class="mob-menu-link" data-scroll><span class="mm-num">04</span>Skills</a>
+          <a href="#faq" class="mob-menu-link" data-scroll><span class="mm-num">05</span>FAQ</a>
+        </nav>
+        <a href="#contact" class="mob-menu-cta btn-hire" data-scroll>Contact Me →</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HERO OUTER WRAPPER  — 200vh gives scroll space for slide
+  ═══════════════════════════════════════════════════════════ -->
+  <div id="heroOuter">
+
+    <section class="hero" id="hero">
+
+      <!-- Photo stays fixed behind the slides -->
+      <picture>
+        <source media="(max-width: 768px)" srcset="assets/mob2.png">
+        <img src="assets/Firefly1.png" alt="Rahul" class="hero-photo" id="heroPhoto">
+      </picture>
+
+      <!-- Bottom gradient: blends photo into bg -->
+      <div class="hero-fade"></div>
+
+      <!-- Brandmark stays fixed (like Serge's "S" logo) -->
+      <div class="hero-brandmark" id="heroBrandmark" aria-hidden="true">R.</div>
+
+      <!-- Floating Angular logo near the photo (colorful authentic) -->
+      <div class="hero-tech-chip chip-angular" id="chipAngular" aria-hidden="true">
+        <img src="https://cdn.simpleicons.org/angular/dd0031" alt="Angular">
+        <span>Angular</span>
+      </div>
+      <div class="hero-tech-chip chip-python" id="chipPython" aria-hidden="true">
+        <img src="https://cdn.simpleicons.org/python/3776ab" alt="Python">
+        <span>Python</span>
+      </div>
+      <div class="hero-tech-chip chip-node" id="chipNode" aria-hidden="true">
+        <img src="https://cdn.simpleicons.org/nodedotjs/339933" alt="Node.js">
+        <span>Node.js</span>
+      </div>
+
+      <!-- Scroll arrow always visible -->
+      <a href="#about" class="hero-arrow" id="heroArrow" data-scroll aria-label="Scroll down">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M8 2v12M2 8l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </a>
+
+      <!-- ══════════════════════════════════════
+           SLIDES CONTAINER  (200vw, scrubbed ←)
+      ══════════════════════════════════════ -->
+      <div class="hero-slides" id="heroSlides">
+
+        <!-- ─── SLIDE 1 : main hero view ─── -->
+        <div class="h-slide s1">
+
+          <div class="s1-content" id="s1Content">
+            <h1 class="hero-headline" id="heroHeadline">
+              <span class="hl-greet" id="hlGreet">
+                <span class="hl-wrap"><span class="hl-g">I'm Rahul.</span></span>
+              </span>
+              <span class="hl-main" id="hlMain">
+                <span class="hl-wrap"><span class="hl">Software engineering,</span></span>
+                <span class="hl-wrap"><span class="hl">systems &amp; AI.</span></span>
+              </span>
+            </h1>
+            <div class="hero-stats" id="heroStats">
+              <div class="hstat">
+                <span class="hstat-val">1yr+</span>
+                <span class="hstat-label">Industry<br>experience</span>
+              </div>
+              <div class="hstat-sep"></div>
+              <div class="hstat">
+                <img class="hstat-icon" src="https://cdn.simpleicons.org/angular/f91072" alt="">
+                <span class="hstat-label">Angular<br>developer</span>
+              </div>
+              <div class="hstat-sep"></div>
+              <div class="hstat">
+                <img class="hstat-icon" src="https://cdn.simpleicons.org/docker/f91072" alt="">
+                <span class="hstat-label">Docker &<br>Kubernetes</span>
+              </div>
+              <div class="hstat-sep"></div>
+              <div class="hstat">
+                <span class="hstat-val">Open</span>
+                <span class="hstat-label">to full-time<br>roles</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /s1 -->
+
+        <!-- ─── SLIDE 2 : secondary text (image 5 style) ─── -->
+        <div class="h-slide s2">
+
+          <div class="s2-center">
+            <p class="s2-headline">
+              I build scalable<br>
+              products that<br>
+              actually ship.
+            </p>
+          </div>
+
+
+        </div><!-- /s2 -->
+
+      </div><!-- /hero-slides -->
+
+    </section>
+  </div><!-- /heroOuter -->
+
+  <!-- ═══════════════════════════
+       ABOUT
+  ═══════════════════════════ -->
+  <section class="about-section" id="about">
+    <div class="about-inner">
+      <span class="section-label">About</span>
+      <p class="about-text" id="aboutText">I'm Rahul, a <em>Software Engineer</em> with 1+ year of experience building
+        full-stack applications, scalable APIs, and AI-powered pipelines. I turn <em>complex problems</em> into clean,
+        efficient systems — from database to cloud.</p>
+      <div class="about-row">
+        <a href="#" class="pink-link">View Resume →</a>
+        <div class="about-icons">
+          <img src="https://cdn.simpleicons.org/python/3776ab" alt="Python" title="Python">
+          <img src="https://cdn.simpleicons.org/nodedotjs/339933" alt="Node.js" title="Node.js">
+          <img src="https://cdn.simpleicons.org/angular/dd0031" alt="Angular" title="Angular">
+          <img src="https://cdn.simpleicons.org/docker/2496ed" alt="Docker" title="Docker">
+          <img src="https://cdn.simpleicons.org/kubernetes/326ce5" alt="Kubernetes" title="Kubernetes">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════
+       SKILLS MARQUEE
+  ═══════════════════════════ -->
+  <section class="skills-section" id="skills">
+    <div class="skills-header">
+      <span class="section-label">Tech Stack</span>
+      <h2 class="section-title">Skills & Tools</h2>
+    </div>
+
+    <div class="marquee-row">
+      <div class="marquee-inner">
+        <div class="skill-pill"><img src="https://cdn.simpleicons.org/python/3776ab" alt=""><span>Python</span></div>
+        <div class="skill-pill"><img src="https://cdn.simpleicons.org/angular/dd0031" alt=""><span>Angular</span></div>
+        <div class="skill-pill"><img src="https://cdn.simpleicons.org/nodedotjs/339933" alt=""><span>Node.js</span>
+        </div>
+        <div class="skill-pill"><img src="https://cdn.simpleicons.org/nestjs/e0234e" alt=""><span>NestJS</span></div>
+        <div class="skill-pill"><img src="https://cdn.simpleicons.org/mongodb/47a248" alt=""><span>MongoDB</span></div>
+        <div class="skill-pill"><img src="https://cdn.simpleicons.org/postgresql/4169e1" alt=""><span>PostgreSQL</span>
+        </div>
+        <div class="skill-pill"><img src="https://cdn.simpleicons.org/rabbitmq/ff6600" alt=""><span>RabbitMQ</span>
+        </div>
+        <div class="skill-pill"><img src="https://cdn.simpleicons.org/docker/2496ed" alt=""><span>Docker</span></div>
+        <!-- dup -->
+        <div class="marquee-dupe">
+          <div class="skill-pill"><img src="https://cdn.simpleicons.org/python/3776ab" alt=""><span>Python</span></div>
+          <div class="skill-pill"><img src="https://cdn.simpleicons.org/angular/dd0031" alt=""><span>Angular</span>
+          </div>
+          <div class="skill-pill"><img src="https://cdn.simpleicons.org/nodedotjs/339933" alt=""><span>Node.js</span>
+          </div>
+          <div class="skill-pill"><img src="https://cdn.simpleicons.org/nestjs/e0234e" alt=""><span>NestJS</span></div>
+          <div class="skill-pill"><img src="https://cdn.simpleicons.org/mongodb/47a248" alt=""><span>MongoDB</span>
+          </div>
+          <div class="skill-pill"><img src="https://cdn.simpleicons.org/postgresql/4169e1"
+              alt=""><span>PostgreSQL</span></div>
+          <div class="skill-pill"><img src="https://cdn.simpleicons.org/rabbitmq/ff6600" alt=""><span>RabbitMQ</span>
+          </div>
+          <div class="skill-pill"><img src="https://cdn.simpleicons.org/docker/2496ed" alt=""><span>Docker</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="marquee-row reverse">
+      <div class="marquee-inner">
+        <div class="skill-pill"><img src="https://cdn.simpleicons.org/kubernetes/326ce5" alt=""><span>Kubernetes</span>
+        </div>
+        <div class="skill-pill"><img src="https://cdn.simpleicons.org/githubactions/2088ff" alt=""><span>CI / CD</span>
+        </div>
+        <div class="skill-pill pill-pink"><span class="pill-emoji">🧠</span><span>RAG Pipeline</span></div>
+        <div class="skill-pill pill-pink"><span class="pill-emoji">⚡</span><span>Vector DB</span></div>
+        <div class="skill-pill"><img src="https://cdn.simpleicons.org/postgresql/4169e1" alt=""><span>PostgreSQL</span>
+        </div>
+        <div class="skill-pill"><img src="https://cdn.simpleicons.org/nestjs/e0234e" alt=""><span>NestJS</span></div>
+        <div class="skill-pill"><img src="https://cdn.simpleicons.org/angular/dd0031" alt=""><span>Angular</span></div>
+        <div class="skill-pill"><img src="https://cdn.simpleicons.org/python/3776ab" alt=""><span>Python</span></div>
+        <!-- dup -->
+        <div class="marquee-dupe">
+          <div class="skill-pill"><img src="https://cdn.simpleicons.org/kubernetes/326ce5"
+              alt=""><span>Kubernetes</span></div>
+          <div class="skill-pill"><img src="https://cdn.simpleicons.org/githubactions/2088ff" alt=""><span>CI /
+              CD</span></div>
+          <div class="skill-pill pill-pink"><span class="pill-emoji">🧠</span><span>RAG Pipeline</span></div>
+          <div class="skill-pill pill-pink"><span class="pill-emoji">⚡</span><span>Vector DB</span></div>
+          <div class="skill-pill"><img src="https://cdn.simpleicons.org/postgresql/4169e1"
+              alt=""><span>PostgreSQL</span></div>
+          <div class="skill-pill"><img src="https://cdn.simpleicons.org/nestjs/e0234e" alt=""><span>NestJS</span></div>
+          <div class="skill-pill"><img src="https://cdn.simpleicons.org/angular/dd0031" alt=""><span>Angular</span>
+          </div>
+          <div class="skill-pill"><img src="https://cdn.simpleicons.org/python/3776ab" alt=""><span>Python</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════
+       WORK — horizontal scroll
+  ═══════════════════════════ -->
+  <section class="horizontal-section" id="work">
+    <div class="work-header">
+      <span class="section-label">Selected Work</span>
+      <h2 class="section-title">Recent Projects</h2>
+    </div>
+    <div class="horizontal-track">
+
+      <article class="work-card">
+        <a href="https://www.rayzonexhibition.com/" target="_blank" rel="noopener" class="wc-link">
+          <div class="wc-media wc-media-img">
+            <img src="assets/image.png" alt="Rayzon Exhibition" class="wc-cover-img">
+            <div class="wc-gloss"></div>
+            <span class="wc-num">01</span>
+            <span class="wc-visit">Visit Site ↗</span>
+          </div>
+          <div class="wc-info">
+            <h3>Rayzon Exhibition Portfolio</h3>
+            <p>Designed and built a portfolio website for an exhibition company showcasing their projects and services.
+            </p>
+            <div class="wc-tags"><span>Portfolio</span><span>Web Design</span><span>Exhibition</span></div>
+          </div>
+        </a>
+      </article>
+
+      <!-- ── CARD 02: Divert Media — fashion portfolio ── -->
+      <article class="work-card">
+        <a href="https://divertmedia.netlify.app/" target="_blank" rel="noopener" class="wc-link">
+          <div class="wc-media wc-media-img">
+            <img src="assets/divert media.png" alt="Divert Media" class="wc-cover-img">
+            <div class="wc-gloss"></div>
+            <span class="wc-num">02</span>
+            <span class="wc-visit">Visit Site ↗</span>
+          </div>
+          <div class="wc-info">
+            <h3>Divert Media Portfolio</h3>
+            <p>Designed and built a sleek portfolio website for a fashion design company, highlighting their creative
+              work and brand identity.</p>
+            <div class="wc-tags"><span>Fashion</span><span>Portfolio</span><span>Web Design</span></div>
+          </div>
+        </a>
+      </article>
+
+      <!-- ── CARD 03: RAG Chatbot — animated chat UI ── -->
+      <article class="work-card">
+        <div class="wc-media m-pink wc-chat-card">
+          <div class="wc-gloss"></div>
+          <span class="wc-num">03</span>
+          <div class="chat-ui">
+            <div class="chat-bubble cb-user">How does RAG work?</div>
+            <div class="chat-bubble cb-bot">
+              Retrieves relevant docs from vector store, then generates a grounded response 🧠
+            </div>
+            <div class="chat-bubble cb-user">Show me live</div>
+            <div class="chat-typing-indicator">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+        <div class="wc-info">
+          <h3>RAG Chatbot Platform</h3>
+          <p>Document-aware AI chatbot using RAG pipeline, Pinecone vector DB, and GPT-4.</p>
+          <div class="wc-tags"><span>Python</span><span>Vector DB</span><span>RAG</span></div>
+        </div>
+      </article>
+
+      <!-- ── CARD 04: DevOps — animated pipeline ── -->
+      <article class="work-card">
+        <div class="wc-media m-green wc-pipe-card">
+          <div class="wc-gloss"></div>
+          <span class="wc-num">04</span>
+          <div class="pipe-ui">
+            <div class="pipe-stages">
+              <div class="ps done">
+                <div class="ps-dot"></div><span>Build</span>
+              </div>
+              <div class="ps-line done"></div>
+              <div class="ps done">
+                <div class="ps-dot"></div><span>Test</span>
+              </div>
+              <div class="ps-line active"></div>
+              <div class="ps active">
+                <div class="ps-dot pulse"></div><span>Deploy</span>
+              </div>
+              <div class="ps-line"></div>
+              <div class="ps">
+                <div class="ps-dot"></div><span>K8s</span>
+              </div>
+            </div>
+            <div class="pipe-logs">
+              <div class="plog l1"><span class="plog-ok">✓</span> Docker build complete</div>
+              <div class="plog l2"><span class="plog-ok">✓</span> 47/47 tests passed</div>
+              <div class="plog l3"><span class="plog-spin">⟳</span> Rolling deploy to cluster...</div>
+              <div class="plog l4"><span class="plog-ok">✓</span> 3/3 pods healthy</div>
+            </div>
+          </div>
+        </div>
+        <div class="wc-info">
+          <h3>DevOps CI/CD Pipeline</h3>
+          <p>Kubernetes deployment with GitHub Actions, Docker, Helm charts, auto-scaling on GCP.</p>
+          <div class="wc-tags"><span>Kubernetes</span><span>Docker</span><span>CI/CD</span></div>
+        </div>
+      </article>
+
+      <!-- ── CARD 05: Analytics — animated bar chart ── -->
+      <article class="work-card">
+        <div class="wc-media m-purple wc-chart-card">
+          <div class="wc-gloss"></div>
+          <span class="wc-num">05</span>
+          <div class="chart-ui">
+            <div class="chart-header">
+              <span class="chart-val" id="chartVal">2,418</span>
+              <span class="chart-label">events / sec</span>
+              <span class="chart-badge">● LIVE</span>
+            </div>
+            <div class="chart-bars-wrap">
+              <div class="cb" style="--h:62%">
+                <div class="cb-fill"></div><span>Mon</span>
+              </div>
+              <div class="cb" style="--h:83%">
+                <div class="cb-fill"></div><span>Tue</span>
+              </div>
+              <div class="cb" style="--h:47%">
+                <div class="cb-fill"></div><span>Wed</span>
+              </div>
+              <div class="cb" style="--h:95%">
+                <div class="cb-fill"></div><span>Thu</span>
+              </div>
+              <div class="cb" style="--h:71%">
+                <div class="cb-fill"></div><span>Fri</span>
+              </div>
+              <div class="cb" style="--h:88%">
+                <div class="cb-fill"></div><span>Sat</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="wc-info">
+          <h3>Angular Analytics Dashboard</h3>
+          <p>Real-time analytics with WebSocket feeds, RabbitMQ event streaming, MongoDB aggregations.</p>
+          <div class="wc-tags"><span>Angular</span><span>RabbitMQ</span><span>MongoDB</span></div>
+        </div>
+      </article>
+
+      <div class="work-end-card">
+        <a href="#" class="work-end-link magnetic">
+          <span>View all</span>
+          <span class="end-pink">Projects →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════
+       TESTIMONIALS
+  ═══════════════════════════ -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="testimonials-inner">
+      <span class="section-label">Kind Words</span>
+      <div class="testimonials-grid">
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <blockquote>"Rahul's backend work on our API was outstanding — clean architecture, well-documented, shipped on
+            time."</blockquote>
+          <div class="t-author">
+            <div class="t-avatar av-pink"></div>
+            <div>
+              <div class="t-name">Arjun Mehta</div>
+              <div class="t-role">Tech Lead, DataFlow Inc.</div>
+            </div>
+          </div>
+        </div>
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <blockquote>"The RAG pipeline Rahul built cut our support response time by 60%. Genuinely impressive AI work."
+          </blockquote>
+          <div class="t-author">
+            <div class="t-avatar av-blue"></div>
+            <div>
+              <div class="t-name">Neha Sharma</div>
+              <div class="t-role">Product Manager, Nexora</div>
+            </div>
+          </div>
+        </div>
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <blockquote>"Solid DevOps engineer — our Kubernetes cluster went from zero to production in two weeks."
+          </blockquote>
+          <div class="t-author">
+            <div class="t-avatar av-green"></div>
+            <div>
+              <div class="t-name">Karan Patel</div>
+              <div class="t-role">CTO, BuildFast</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════
+       FAQ
+  ═══════════════════════════ -->
+  <section class="faq-section" id="faq">
+    <div class="faq-inner">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-title">Common Questions</h2>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary class="faq-q">What technologies do you specialize in?</summary>
+          <div class="faq-a">
+            <p>My core stack is Python, Node.js/NestJS, and Angular. Infrastructure: Docker, Kubernetes, CI/CD. Also
+              hands-on with RAG pipelines using Pinecone/Chroma and RabbitMQ.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Are you open to full-time positions?</summary>
+          <div class="faq-a">
+            <p>Yes — actively looking for full-time back-end, full-stack, or DevOps roles. Open to contract work too.
+            </p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Do you work remotely?</summary>
+          <div class="faq-a">
+            <p>Absolutely. Comfortable with remote and hybrid. Async-first, documentation-friendly, distributed team
+              experience.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">How quickly can you start?</summary>
+          <div class="faq-a">
+            <p>Typically within 1–2 weeks of offer confirmation. Let's align on a timeline that works.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">How do I get in touch?</summary>
+          <div class="faq-a">
+            <p>Fastest is email — rahulmurali9080@gmail.com. Or hit the "Hire Me" button in the nav.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════
+       FOOTER
+  ═══════════════════════════ -->
+  <footer class="footer" id="contact">
+    <div class="footer-inner">
+
+      <div class="footer-headline">
+        <p class="footer-big">Let's work<br>together.</p>
+        <a href="mailto:rahulmurali9080@gmail.com" class="btn-hire magnetic footer-btn">Get in Touch →</a>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <div class="footer-logo">RaHuL.m</div>
+          <p class="footer-tagline">Building scalable systems,<br>one commit at a time.</p>
+        </div>
+        <div class="footer-info-col">
+          <span class="footer-col-label">Contact</span>
+          <a href="mailto:rahulmurali9080@gmail.com" class="fc-link">rahulmurali9080@gmail.com</a>
+          <a href="tel:+919061830598" class="fc-link">+91 90618 30598</a>
+        </div>
+        <div class="footer-info-col">
+          <span class="footer-col-label">Social</span>
+          <a href="https://github.com/rahulm0598/Portfolio2026" target="_blank" rel="noopener" class="fc-link">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            GitHub
+          </a>
+          <a href="https://www.instagram.com/rauleee_e_?igsh=MTZnd2hidGl2eWJ5OQ==" target="_blank" rel="noopener" class="fc-link">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            Instagram
+          </a>
+        </div>
+        <div class="footer-copy-col">
+          <span>© 2026 Rahul.<br>All rights reserved.</span>
+        </div>
+      </div>
+
+      <div style="display:none"><nav class="footer-nav">
+          <a href="https://github.com/rahulm0598" target="_blank" rel="noopener" class="footer-social-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
+            </svg>
+            <span>GitHub</span>
+          </a>
+          <a href="https://www.instagram.com/rauleee_e_?igsh=MTZnd2hidGl2eWJ5OQ==" target="_blank" rel="noopener"
+            class="footer-social-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+            </svg>
+            <span>Instagram</span>
+          </a>
+        </nav>
+      </div></div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --check \"D:/Portfolio 2026/main.js\")",
+      "WebFetch(domain:sergestudios.com)",
+      "Bash(curl -sL \"https://sergestudios.com/\")",
+      "Read(//tmp/**)",
+      "Bash(grep -oE '\"[a-zA-Z]+\":\"[^\"]{1,60}\"' /tmp/serge.html)",
+      "Bash(grep -oE 'framer-text\">[^<]{5,200}<' /tmp/serge.html)",
+      "Bash(pkill -f \"python -m http.server\")",
+      "Bash(python -m http.server 3000)",
+      "Bash(curl -s -o /dev/null -w \"Server: %{http_code}\" http://localhost:3000/)",
+      "Bash(curl -sL \"https://framerusercontent.com/images/B3aN3tD0efQcj9SiqldOy9exEZ8.png\" -o /tmp/serge_portrait.png)",
+      "Bash(identify /tmp/serge_portrait.png)",
+      "Bash(grep -oE 'style=\"[^\"]{50,500}\"' /tmp/serge.html)",
+      "Bash(grep -oP '\\(?<=Tab_Hero\\)\\(.{0,2000}\\)' /tmp/serge.html)",
+      "Bash(grep -oE '\\\\.framer-[a-z0-9]+\\\\{[^}]{20,300}\\\\}' /tmp/serge.html)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\" http://localhost:3000/)"
+    ]
+  }
+}
