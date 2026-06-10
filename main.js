@@ -8,19 +8,18 @@
    ================================================================ */
 
 
-/* ── Custom Cursor ──────────────────────────────────────────── */
+/* ── Custom Cursor — transform-only, runs on the GSAP ticker ── */
 const cursorEl = document.getElementById('cursor');
 const followerEl = document.getElementById('cursorFollower');
 let mouseX = 0, mouseY = 0, follX = 0, follY = 0;
 document.addEventListener('mousemove', e => {
   mouseX = e.clientX; mouseY = e.clientY;
-  cursorEl.style.left = mouseX + 'px'; cursorEl.style.top = mouseY + 'px';
+}, { passive: true });
+gsap.ticker.add(() => {
+  follX += (mouseX - follX) * .12; follY += (mouseY - follY) * .12;
+  cursorEl.style.transform = `translate3d(${mouseX}px,${mouseY}px,0) translate(-50%,-50%)`;
+  followerEl.style.transform = `translate3d(${follX}px,${follY}px,0) translate(-50%,-50%)`;
 });
-(function follow() {
-  follX += (mouseX - follX) * .1; follY += (mouseY - follY) * .1;
-  followerEl.style.left = follX + 'px'; followerEl.style.top = follY + 'px';
-  requestAnimationFrame(follow);
-})();
 document.querySelectorAll('a,button,summary,.skill-pill,.work-end-link').forEach(el => {
   el.addEventListener('mouseenter', () => { cursorEl.classList.add('hover'); followerEl.classList.add('hover'); });
   el.addEventListener('mouseleave', () => { cursorEl.classList.remove('hover'); followerEl.classList.remove('hover'); });
@@ -37,6 +36,47 @@ gsap.ticker.lagSmoothing(0);
 
 /* ── GSAP setup ─────────────────────────────────────────────── */
 gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.config({ ignoreMobileResize: true });
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ── Split-text helpers (vanilla SplitText) ─────────────────── */
+/* Wraps every char in .char spans — preserves <br> and child elements */
+function wrapChars(node) {
+  [...node.childNodes].forEach(child => {
+    if (child.nodeType === 3) {
+      const frag = document.createDocumentFragment();
+      [...child.textContent].forEach(ch => {
+        const s = document.createElement('span');
+        s.className = 'char';
+        s.textContent = ch === ' ' ? ' ' : ch;
+        frag.appendChild(s);
+      });
+      node.replaceChild(frag, child);
+    } else if (child.nodeType === 1 && child.tagName !== 'BR') {
+      wrapChars(child);
+    }
+  });
+}
+
+/* Wraps every word in .w spans — preserves <em> etc. */
+function wrapWords(node) {
+  [...node.childNodes].forEach(child => {
+    if (child.nodeType === 3) {
+      const frag = document.createDocumentFragment();
+      child.textContent.split(/(\s+)/).forEach(part => {
+        if (!part.trim()) { frag.appendChild(document.createTextNode(part)); return; }
+        const s = document.createElement('span');
+        s.className = 'w';
+        s.textContent = part;
+        frag.appendChild(s);
+      });
+      node.replaceChild(frag, child);
+    } else if (child.nodeType === 1) {
+      wrapWords(child);
+    }
+  });
+}
 
 /* ── Navbar: white-glass on hero → dark after hero ──────────── */
 ScrollTrigger.create({
@@ -104,20 +144,50 @@ gsap.set('#heroPhoto', {
 gsap.set('#heroBrandmark', { opacity: 0, y: -20 });
 gsap.set('.hl', { y: '110%' });
 gsap.set('.hl-g', { y: '110%' });
-gsap.set('.hl', { y: '110%' });
 gsap.set('#hlMain', { opacity: 1 });
 gsap.set('.hero-stats', { opacity: 0 });
 gsap.set('#heroArrow', { opacity: 0 });
 gsap.set('.hero-tech-chip', { opacity: 0, scale: 0.8, y: 10 });
 
-/* Load: photo + "I'm Rahul." enters, stays */
-const heroTl = gsap.timeline({ delay: 0.05, defaults: { ease: 'power4.out' } });
+/* Load: photo + "I'm Rahul." enters, stays — paused, fired by preloader */
+gsap.set('#heroPhoto', { scale: isMob ? 1 : 1.08 });
+const heroTl = gsap.timeline({ paused: true, defaults: { ease: 'power4.out' } });
 heroTl
-  .to('#heroPhoto', { opacity: 1, scale: 1, duration: isMob ? 0 : 1.4 }, 0)
+  .to('#heroPhoto', { opacity: 1, scale: 1, duration: isMob ? 0 : 1.6 }, 0)
   .to('#heroBrandmark', { opacity: 1, y: 0, duration: 0.8 }, 0.25)
   .to('.hl-g', { y: '0%', duration: 0.9 }, 0.45)
   .to('#heroArrow', { opacity: 1, duration: 0.6 }, 1.5)
   .to('.hero-tech-chip', { opacity: 1, scale: 1, y: 0, stagger: 0.12, duration: 0.7, ease: 'back.out(1.5)' }, 1.5);
+
+/* ================================================================
+   PRELOADER — counter ticks to 100, name exits, curtain lifts
+   ================================================================ */
+const preEl = document.getElementById('preloader');
+const preCountEl = document.getElementById('preCounter');
+const preNameEl = document.getElementById('preName');
+
+if (reduceMotion) {
+  preEl.style.display = 'none';
+  heroTl.progress(1);
+} else {
+  wrapChars(preNameEl);
+  gsap.set('#preName .char', { yPercent: 120 });
+  lenis.stop();
+
+  const cnt = { v: 0 };
+  gsap.timeline({
+    onComplete: () => { preEl.style.display = 'none'; lenis.start(); }
+  })
+    .to('#preName .char', { yPercent: 0, stagger: 0.04, duration: 0.7, ease: 'power4.out' }, 0)
+    .to(cnt, {
+      v: 100, duration: 1.5, ease: 'power2.inOut',
+      onUpdate: () => { preCountEl.textContent = Math.round(cnt.v); }
+    }, 0)
+    .to('#preName .char', { yPercent: -120, stagger: 0.03, duration: 0.5, ease: 'power3.in' }, 1.3)
+    .to('.pre-counter', { opacity: 0, duration: 0.3 }, 1.5)
+    .to(preEl, { yPercent: -100, duration: 0.9, ease: 'power4.inOut' }, 1.7)
+    .add(() => heroTl.play(), 2.0);
+}
 
 /* Stats appear with "Software engineering..." on scroll step 2 */
 gsap.fromTo('.hero-stats',
@@ -152,18 +222,20 @@ gsap.fromTo('.s2-headline',
   }
 );
 
-/* Perpetual bubble float — y + x drift + subtle rotation for organic feel */
-gsap.to('#chipAngular', { y: -14, x: 6, duration: 2.8, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 2.5 });
-gsap.to('#chipAngular', { rotation: 2, duration: 3.4, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 2.5 });
-gsap.to('#chipPython', { y: 12, x: -8, duration: 3.2, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 2.8 });
-gsap.to('#chipPython', { rotation: -2, duration: 3.8, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 2.8 });
-gsap.to('#chipNode', { y: -10, x: 5, duration: 3.0, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 3.0 });
-gsap.to('#chipNode', { rotation: 1.5, duration: 2.6, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 3.0 });
-
-/* Gentle card float after entrance */
-gsap.to('#heroCard', {
-  y: -10, duration: 2.8, repeat: -1, yoyo: true,
-  ease: 'sine.inOut', delay: 2.1
+/* Perpetual bubble float — paused when hero scrolls out of view */
+const chipTweens = [
+  gsap.to('#chipAngular', { y: -14, x: 6, duration: 2.8, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 2.5 }),
+  gsap.to('#chipAngular', { rotation: 2, duration: 3.4, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 2.5 }),
+  gsap.to('#chipPython', { y: 12, x: -8, duration: 3.2, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 2.8 }),
+  gsap.to('#chipPython', { rotation: -2, duration: 3.8, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 2.8 }),
+  gsap.to('#chipNode', { y: -10, x: 5, duration: 3.0, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 3.0 }),
+  gsap.to('#chipNode', { rotation: 1.5, duration: 2.6, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 3.0 }),
+];
+ScrollTrigger.create({
+  trigger: '#heroOuter',
+  start: 'top bottom',
+  end: 'bottom top',
+  onToggle: self => chipTweens.forEach(t => self.isActive ? t.play() : t.pause()),
 });
 
 /* ================================================================
@@ -247,6 +319,37 @@ mm.add("(min-width: 769px)", () => {
   }
 });
 
+/* ================================================================
+   SCROLL-VELOCITY SKEW — content leans with scroll speed (desktop)
+   ================================================================ */
+mm.add("(min-width: 769px)", () => {
+  const setters = [...document.querySelectorAll('.marquee-row, .testimonials-grid')]
+    .map(el => gsap.quickSetter(el, 'skewY', 'deg'));
+  const proxy = { skew: 0 };
+  const clamp = gsap.utils.clamp(-5, 5);
+  const apply = () => setters.forEach(set => set(proxy.skew));
+  const st = ScrollTrigger.create({
+    onUpdate(self) {
+      const skew = clamp(self.getVelocity() / -450);
+      if (Math.abs(skew) > Math.abs(proxy.skew)) {
+        proxy.skew = skew;
+        gsap.to(proxy, { skew: 0, duration: 0.8, ease: 'power3.out', overwrite: true, onUpdate: apply });
+      }
+    }
+  });
+  return () => st.kill();
+});
+
+/* ================================================================
+   OFFSCREEN ANIMATION PAUSE — infinite CSS animations (shimmer,
+   marquee, card demos) stop painting when section not visible
+   ================================================================ */
+const animIO = new IntersectionObserver(entries => {
+  entries.forEach(en => en.target.classList.toggle('anim-off', !en.isIntersecting));
+}, { rootMargin: '120px' });
+document.querySelectorAll('.hero, .marquee-row, .wc-media, .hero-arrow')
+  .forEach(el => animIO.observe(el));
+
 // Refresh triggers after logic is set
 ScrollTrigger.refresh();
 
@@ -254,10 +357,13 @@ ScrollTrigger.refresh();
    SCROLL REVEAL — all sections
    ================================================================ */
 
-/* Helper: clip-up reveal for big headlines */
+/* Helper: char-stagger mask reveal for big headlines */
 function revealTitle(el, trigger, delay = 0) {
-  gsap.from(el, {
-    y: 60, opacity: 0, duration: 1.0, delay,
+  const t = typeof el === 'string' ? document.querySelector(el) : el;
+  if (!t) return;
+  wrapChars(t);
+  gsap.from(t.querySelectorAll('.char'), {
+    yPercent: 120, stagger: 0.028, duration: 0.9, delay,
     ease: 'power4.out',
     scrollTrigger: { trigger, start: 'top 85%', toggleActions: 'play none none none' }
   });
@@ -277,7 +383,15 @@ gsap.from('.about-section .section-label', {
   x: -24, opacity: 0, duration: 0.7, ease: 'power3.out',
   scrollTrigger: { trigger: '.about-section', start: 'top 85%', toggleActions: 'play none none none' }
 });
-revealTitle('#aboutText', '.about-section', 0.1);
+/* Word-by-word brighten as you scroll through the paragraph */
+const aboutTextEl = document.getElementById('aboutText');
+wrapWords(aboutTextEl);
+gsap.fromTo('#aboutText .w',
+  { opacity: 0.12 },
+  { opacity: 1, stagger: 0.05, ease: 'none',
+    scrollTrigger: { trigger: '.about-section', start: 'top 75%', end: 'center 45%', scrub: 0.5 }
+  }
+);
 fadeUp('.about-row', '.about-section', 0.25);
 
 /* ── SKILLS ── */
@@ -346,7 +460,11 @@ document.querySelectorAll('.magnetic').forEach(btn => {
    ================================================================ */
 const chartValEl = document.getElementById('chartVal');
 if (chartValEl) {
+  let chartVisible = false;
+  new IntersectionObserver(([en]) => { chartVisible = en.isIntersecting; })
+    .observe(chartValEl);
   setInterval(() => {
+    if (!chartVisible) return;
     const base = 2400;
     const val = base + Math.floor(Math.random() * 200 - 100);
     chartValEl.textContent = val.toLocaleString();
@@ -356,23 +474,17 @@ if (chartValEl) {
 /* ================================================================
    FOOTER
    ================================================================ */
-gsap.from('.footer-logo', {
-  y: 40, opacity: 0, duration: 1.0, ease: 'power4.out',
-  scrollTrigger: { trigger: '.footer', start: 'top 88%', toggleActions: 'play none none none' }
-});
-gsap.from('.footer-brand p, .footer-contacts', {
-  y: 24, opacity: 0, stagger: 0.12, duration: 0.8, ease: 'power3.out',
-  scrollTrigger: { trigger: '.footer', start: 'top 85%', toggleActions: 'play none none none' }
-});
-gsap.from('.footer-cta-text', {
-  y: 40, opacity: 0, duration: 1.0, ease: 'power4.out',
-  scrollTrigger: { trigger: '.footer-cta', start: 'top 90%', toggleActions: 'play none none none' }
+const footerBigEl = document.querySelector('.footer-big');
+wrapChars(footerBigEl);
+gsap.from('.footer-big .char', {
+  yPercent: 120, stagger: 0.02, duration: 0.9, ease: 'power4.out',
+  scrollTrigger: { trigger: '.footer', start: 'top 80%', toggleActions: 'play none none none' }
 });
 gsap.from('.footer-btn', {
-  y: 20, opacity: 0, duration: 0.7, delay: 0.2, ease: 'power3.out',
-  scrollTrigger: { trigger: '.footer-cta', start: 'top 90%', toggleActions: 'play none none none' }
+  y: 20, opacity: 0, duration: 0.7, delay: 0.25, ease: 'power3.out',
+  scrollTrigger: { trigger: '.footer', start: 'top 85%', toggleActions: 'play none none none' }
 });
-gsap.from('.footer-bottom', {
-  opacity: 0, y: 16, duration: 0.7, ease: 'power2.out',
-  scrollTrigger: { trigger: '.footer-bottom', start: 'top 95%', toggleActions: 'play none none none' }
+gsap.from('.footer-grid > div', {
+  y: 24, opacity: 0, stagger: 0.1, duration: 0.8, ease: 'power3.out',
+  scrollTrigger: { trigger: '.footer-grid', start: 'top 92%', toggleActions: 'play none none none' }
 });

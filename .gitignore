@@ -1,0 +1,9 @@
+# Installers / binaries — never commit these
+*.exe
+*.msi
+*.dmg
+*.zip
+
+# OS / editor noise
+Thumbs.db
+.DS_Store

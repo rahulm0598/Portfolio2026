@@ -15,7 +15,15 @@
       "Bash(grep -oE 'style=\"[^\"]{50,500}\"' /tmp/serge.html)",
       "Bash(grep -oP '\\(?<=Tab_Hero\\)\\(.{0,2000}\\)' /tmp/serge.html)",
       "Bash(grep -oE '\\\\.framer-[a-z0-9]+\\\\{[^}]{20,300}\\\\}' /tmp/serge.html)",
-      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\" http://localhost:3000/)"
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\" http://localhost:3000/)",
+      "Bash(git branch *)",
+      "Bash(git push *)",
+      "PowerShell(claude plugin *)",
+      "WebSearch",
+      "PowerShell(Select-String *)",
+      "PowerShell($p = 'D:\\\\Portfolio 2026\\\\main.js'; $line = \\(Get-Content $p\\)[51]; [int[]][char[]]$line.Trim\\(\\) -join ',')",
+      "PowerShell(node --check 'D:\\\\Portfolio 2026\\\\main.js'; if \\($?\\) { 'JS OK' })",
+      "PowerShell(Get-ChildItem 'D:\\\\Portfolio 2026\\\\assets' -File | Select-Object Name, @{n='MB';e={[math]::Round\\($_.Length/1MB,2\\)}} | Sort-Object MB -Descending)"
     ]
   }
 }
